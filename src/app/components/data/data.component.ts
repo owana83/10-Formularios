@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { ObservableInput, Observable } from 'rxjs';
-import { resolve } from 'dns';
-import { reject } from 'q';
+import { Observable } from 'rxjs';
 
 
 
@@ -63,6 +61,16 @@ export class DataComponent {
       this.noIgual.bind(this.forma)
     ]);
 
+    this.forma.controls['username'].valueChanges
+        .subscribe( data => {
+          console.log(data);
+        });
+
+    this.forma.controls['username'].statusChanges
+        .subscribe( data => {
+      console.log(data);
+    });
+
   }
 
   agregarPasatiempo() {
@@ -104,7 +112,7 @@ export class DataComponent {
 
         setTimeout( () => {
           if (control.value === "strider") {
-            resolve({existe: true});
+            resolve ({existe: true});
           } else {
             resolve(null);
           }
